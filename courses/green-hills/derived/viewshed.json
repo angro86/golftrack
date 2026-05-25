@@ -1,0 +1,401 @@
+{
+  "course": "Green Hills Country Club",
+  "holes": [
+    {
+      "ref": 1,
+      "tee_elev_m": 49.0,
+      "play_bearing": 236,
+      "views": {
+        "SFO airport": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 55
+        },
+        "SF Bay": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 56
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 357
+        }
+      }
+    },
+    {
+      "ref": 2,
+      "tee_elev_m": 39.9,
+      "play_bearing": 42,
+      "views": {
+        "SFO airport": {
+          "visible": false,
+          "ahead": true,
+          "bearing": 55
+        },
+        "SF Bay": {
+          "visible": false,
+          "ahead": true,
+          "bearing": 56
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": true,
+          "bearing": 358
+        }
+      }
+    },
+    {
+      "ref": 3,
+      "tee_elev_m": 31.2,
+      "play_bearing": 225,
+      "views": {
+        "SFO airport": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 58
+        },
+        "SF Bay": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 57
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 357
+        }
+      }
+    },
+    {
+      "ref": 4,
+      "tee_elev_m": 40.8,
+      "play_bearing": 195,
+      "views": {
+        "SFO airport": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 56
+        },
+        "SF Bay": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 56
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 358
+        }
+      }
+    },
+    {
+      "ref": 5,
+      "tee_elev_m": 57.7,
+      "play_bearing": 4,
+      "views": {
+        "SFO airport": {
+          "visible": true,
+          "ahead": true,
+          "bearing": 54
+        },
+        "SF Bay": {
+          "visible": true,
+          "ahead": true,
+          "bearing": 55
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": true,
+          "bearing": 358
+        }
+      }
+    },
+    {
+      "ref": 6,
+      "tee_elev_m": 54.5,
+      "play_bearing": 59,
+      "views": {
+        "SFO airport": {
+          "visible": false,
+          "ahead": true,
+          "bearing": 58
+        },
+        "SF Bay": {
+          "visible": false,
+          "ahead": true,
+          "bearing": 58
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 358
+        }
+      }
+    },
+    {
+      "ref": 7,
+      "tee_elev_m": 31.1,
+      "play_bearing": 159,
+      "views": {
+        "SFO airport": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 58
+        },
+        "SF Bay": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 57
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 357
+        }
+      }
+    },
+    {
+      "ref": 8,
+      "tee_elev_m": 47.7,
+      "play_bearing": 139,
+      "views": {
+        "SFO airport": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 54
+        },
+        "SF Bay": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 55
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 357
+        }
+      }
+    },
+    {
+      "ref": 9,
+      "tee_elev_m": 27.4,
+      "play_bearing": 314,
+      "views": {
+        "SFO airport": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 47
+        },
+        "SF Bay": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 52
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": true,
+          "bearing": 356
+        }
+      }
+    },
+    {
+      "ref": 10,
+      "tee_elev_m": 46.1,
+      "play_bearing": 131,
+      "views": {
+        "SFO airport": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 53
+        },
+        "SF Bay": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 55
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 357
+        }
+      }
+    },
+    {
+      "ref": 11,
+      "tee_elev_m": 28.6,
+      "play_bearing": 302,
+      "views": {
+        "SFO airport": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 47
+        },
+        "SF Bay": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 52
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": true,
+          "bearing": 357
+        }
+      }
+    },
+    {
+      "ref": 12,
+      "tee_elev_m": 32.1,
+      "play_bearing": 115,
+      "views": {
+        "SFO airport": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 53
+        },
+        "SF Bay": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 55
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 357
+        }
+      }
+    },
+    {
+      "ref": 13,
+      "tee_elev_m": 30.4,
+      "play_bearing": 253,
+      "views": {
+        "SFO airport": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 48
+        },
+        "SF Bay": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 52
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 357
+        }
+      }
+    },
+    {
+      "ref": 14,
+      "tee_elev_m": 39.1,
+      "play_bearing": 264,
+      "views": {
+        "SFO airport": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 48
+        },
+        "SF Bay": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 52
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 357
+        }
+      }
+    },
+    {
+      "ref": 15,
+      "tee_elev_m": 58.0,
+      "play_bearing": 294,
+      "views": {
+        "SFO airport": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 50
+        },
+        "SF Bay": {
+          "visible": true,
+          "ahead": false,
+          "bearing": 53
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 358
+        }
+      }
+    },
+    {
+      "ref": 16,
+      "tee_elev_m": 68.3,
+      "play_bearing": 89,
+      "views": {
+        "SFO airport": {
+          "visible": true,
+          "ahead": true,
+          "bearing": 54
+        },
+        "SF Bay": {
+          "visible": true,
+          "ahead": true,
+          "bearing": 55
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 358
+        }
+      }
+    },
+    {
+      "ref": 17,
+      "tee_elev_m": 30.7,
+      "play_bearing": 274,
+      "views": {
+        "SFO airport": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 49
+        },
+        "SF Bay": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 52
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": false,
+          "bearing": 357
+        }
+      }
+    },
+    {
+      "ref": 18,
+      "tee_elev_m": 60.5,
+      "play_bearing": 50,
+      "views": {
+        "SFO airport": {
+          "visible": true,
+          "ahead": true,
+          "bearing": 53
+        },
+        "SF Bay": {
+          "visible": true,
+          "ahead": true,
+          "bearing": 55
+        },
+        "Downtown SF": {
+          "visible": false,
+          "ahead": true,
+          "bearing": 358
+        }
+      }
+    }
+  ]
+}
