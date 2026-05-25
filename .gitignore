@@ -5,6 +5,7 @@ __pycache__/
 # Large regenerable downloads — keep small reports + previews + splines in git
 courses/*/raw/
 courses/*/derived/features.geojson
+courses/*/derived/heightmap.raw
 *.laz
 *.las
 *.tif

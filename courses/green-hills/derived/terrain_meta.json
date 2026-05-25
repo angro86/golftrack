@@ -1,0 +1,14 @@
+{
+  "course": "Green Hills Country Club",
+  "crs_epsg": 32610,
+  "box_m": 2048,
+  "heightmap_res": 2049,
+  "meters_per_pixel": 1.0,
+  "min_elev_m": -0.53,
+  "max_elev_m": 167.35,
+  "height_span_m": 167.88,
+  "unity_terrain_size_x_m": 2048,
+  "unity_terrain_size_z_m": 2048,
+  "unity_terrain_height_m": 167.88,
+  "raw_format": "16-bit unsigned, little-endian, no header"
+}

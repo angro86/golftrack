@@ -13,9 +13,9 @@ everything *upstream* of that so the Unity build starts mostly done:
 
 | Phase | Output | Status |
 |-------|--------|--------|
-| acquire | OSM features, USGS LIDAR, NAIP aerial | OSM done |
-| terrain | bare-earth heightmap (OPCD/Unity ready) | next |
-| features | golf polygons → pre-traced Inkscape splines (SVG) | geojson done |
+| acquire | OSM features, USGS LIDAR, NAIP aerial | OSM + DEM done |
+| terrain | bare-earth heightmap (OPCD/Unity ready) | done (USGS 3DEP 1 m) |
+| features | golf polygons → pre-traced Inkscape splines (SVG) | geojson done; SVG next |
 | trees | LIDAR canopy → individual tree positions (Arborist) | planned |
 | scenery | surrounding buildings / airport / water | data pulled |
 
@@ -31,6 +31,9 @@ python3 -m venv .venv
 ```bash
 # Pull OSM data, write features.geojson + hole report + preview PNG
 .venv/bin/python scripts/build_layout.py green-hills
+
+# Pull USGS 3DEP DEM, write 16-bit heightmap (PNG + RAW) + meta + hillshade
+.venv/bin/python scripts/build_terrain.py green-hills
 ```
 
 Outputs land in `courses/<slug>/`:

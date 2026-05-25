@@ -18,6 +18,13 @@ scenery_radius_m: 1600    # neighborhood / mid-distance scenery
 # Projected CRS for accurate lengths/areas — UTM zone 10N (SF Peninsula)
 projected_epsg: 32610
 
+# Terrain capture: square box centered on the course.
+# heightmap_res should be 2^n+1 for Unity terrain (513/1025/2049/4097).
+terrain:
+  box_m: 2048
+  heightmap_res: 2049
+  dem_service: https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer
+
 overpass:
   endpoint: https://overpass-api.de/api/interpreter
   user_agent: "golftrack-gspro/0.1 (angro86@gmail.com)"

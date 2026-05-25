@@ -21,6 +21,13 @@ class CourseConfig:
         self.overpass_endpoint = data["overpass"]["endpoint"]
         self.user_agent = data["overpass"]["user_agent"]
         self.landmarks = data.get("landmarks", {})
+        t = data.get("terrain", {})
+        self.terrain_box_m = t.get("box_m", 2048)
+        self.heightmap_res = t.get("heightmap_res", 2049)
+        self.dem_service = t.get(
+            "dem_service",
+            "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+        )
 
     @property
     def course_dir(self) -> Path:
