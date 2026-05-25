@@ -22,6 +22,11 @@ class CourseConfig:
         self.user_agent = data["overpass"]["user_agent"]
         self.landmarks = data.get("landmarks", {})
         self.scorecard = data.get("scorecard")
+        lidar = data.get("lidar", {})
+        self.ept_url = lidar.get("ept_url")
+        self.lidar_max_depth = lidar.get("max_depth", 12)
+        self.min_tree_height_m = lidar.get("min_tree_height_m", 2.5)
+        self.min_tree_spacing_m = lidar.get("min_tree_spacing_m", 4.0)
         t = data.get("terrain", {})
         self.terrain_box_m = t.get("box_m", 2048)
         self.heightmap_res = t.get("heightmap_res", 2049)

@@ -29,9 +29,12 @@ overpass:
   endpoint: https://overpass-api.de/api/interpreter
   user_agent: "golftrack-gspro/0.1 (angro86@gmail.com)"
 
-# USGS 3DEP Entwine Point Tiles (public AWS) — resolved at build time
+# USGS 3DEP Entwine Point Tiles (public AWS). The 2023 dense collection.
 lidar:
-  ept_public_bucket: https://usgs-lidar-public.s3.amazonaws.com
+  ept_url: https://s3-us-west-2.amazonaws.com/usgs-lidar-public/CA_CaliforniaGaps_3_B23/ept.json
+  max_depth: 12          # octree depth -> ~sub-meter canopy density
+  min_tree_height_m: 2.5 # ignore shrubs/cars below this
+  min_tree_spacing_m: 4.0
 
 # Landmarks for orientation / viewshed annotations
 landmarks:

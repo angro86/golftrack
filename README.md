@@ -16,7 +16,7 @@ everything *upstream* of that so the Unity build starts mostly done:
 | acquire | OSM features, USGS LIDAR, NAIP aerial | OSM + DEM + NAIP done |
 | terrain | bare-earth heightmap (OPCD/Unity ready) | done (USGS 3DEP 1 m) |
 | features | golf polygons → pre-traced Inkscape splines (SVG) | done (smoothed, layered) |
-| trees | LIDAR canopy → individual tree positions (Arborist) | planned |
+| trees | LIDAR canopy → individual tree positions (Arborist) | done (12,410 trees) |
 | scenery | surrounding buildings / airport / water | data pulled |
 
 ## Setup
@@ -40,6 +40,12 @@ python3 -m venv .venv
 
 # USGS NAIP aerial (0.3 m) -> georeferenced overlay + spline validation image
 .venv/bin/python scripts/build_imagery.py green-hills
+
+# Stream LIDAR point cloud -> canopy model -> individual trees (csv for Arborist)
+.venv/bin/python scripts/build_trees.py green-hills
+
+# Per-hole validation crops (aerial + trees + splines) to check vs the app
+.venv/bin/python scripts/hole_crops.py green-hills
 ```
 
 Outputs land in `courses/<slug>/`:

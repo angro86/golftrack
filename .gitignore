@@ -7,6 +7,9 @@ courses/*/raw/
 courses/*/derived/features.geojson
 courses/*/derived/heightmap.raw
 courses/*/preview/aerial*.png
+courses/*/preview/chm.png
+courses/*/preview/trees.png
+courses/*/preview/holes/
 *.laz
 *.las
 *.tif
