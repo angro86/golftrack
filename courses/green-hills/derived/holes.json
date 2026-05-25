@@ -1,0 +1,188 @@
+{
+  "course": "Green Hills Country Club",
+  "holes_found": 18,
+  "total_yards": 6218,
+  "total_par": 71,
+  "holes": [
+    {
+      "ref": 1,
+      "name": null,
+      "length_m": 312.7,
+      "length_yd": 342,
+      "bearing_deg": 236.1,
+      "facing": "SW",
+      "par": 4,
+      "par_source": "osm"
+    },
+    {
+      "ref": 2,
+      "name": null,
+      "length_m": 455.8,
+      "length_yd": 498,
+      "bearing_deg": 41.6,
+      "facing": "NE",
+      "par": 5,
+      "par_source": "osm"
+    },
+    {
+      "ref": 3,
+      "name": null,
+      "length_m": 457.0,
+      "length_yd": 500,
+      "bearing_deg": 225.1,
+      "facing": "SW",
+      "par": 5,
+      "par_source": "osm"
+    },
+    {
+      "ref": 4,
+      "name": null,
+      "length_m": 162.1,
+      "length_yd": 177,
+      "bearing_deg": 194.6,
+      "facing": "SSW",
+      "par": 3,
+      "par_source": "osm"
+    },
+    {
+      "ref": 5,
+      "name": null,
+      "length_m": 325.1,
+      "length_yd": 355,
+      "bearing_deg": 4.4,
+      "facing": "N",
+      "par": 4,
+      "par_source": "osm"
+    },
+    {
+      "ref": 6,
+      "name": null,
+      "length_m": 362.1,
+      "length_yd": 396,
+      "bearing_deg": 58.9,
+      "facing": "ENE",
+      "par": 4,
+      "par_source": "osm"
+    },
+    {
+      "ref": 7,
+      "name": null,
+      "length_m": 135.5,
+      "length_yd": 148,
+      "bearing_deg": 158.5,
+      "facing": "SSE",
+      "par": 3,
+      "par_source": "osm"
+    },
+    {
+      "ref": 8,
+      "name": null,
+      "length_m": 348.8,
+      "length_yd": 381,
+      "bearing_deg": 139.3,
+      "facing": "SE",
+      "par": 4,
+      "par_source": "osm"
+    },
+    {
+      "ref": 9,
+      "name": null,
+      "length_m": 330.2,
+      "length_yd": 361,
+      "bearing_deg": 313.9,
+      "facing": "NW",
+      "par": 4,
+      "par_source": "osm"
+    },
+    {
+      "ref": 10,
+      "name": null,
+      "length_m": 315.8,
+      "length_yd": 345,
+      "bearing_deg": 131.3,
+      "facing": "SE",
+      "par": 4,
+      "par_source": "osm"
+    },
+    {
+      "ref": 11,
+      "name": null,
+      "length_m": 311.1,
+      "length_yd": 340,
+      "bearing_deg": 302.1,
+      "facing": "WNW",
+      "par": 4,
+      "par_source": "osm"
+    },
+    {
+      "ref": 12,
+      "name": null,
+      "length_m": 332.8,
+      "length_yd": 364,
+      "bearing_deg": 115.3,
+      "facing": "ESE",
+      "par": 4,
+      "par_source": "osm"
+    },
+    {
+      "ref": 13,
+      "name": null,
+      "length_m": 153.6,
+      "length_yd": 168,
+      "bearing_deg": 253.0,
+      "facing": "WSW",
+      "par": 3,
+      "par_source": "osm"
+    },
+    {
+      "ref": 14,
+      "name": null,
+      "length_m": 344.1,
+      "length_yd": 376,
+      "bearing_deg": 264.3,
+      "facing": "W",
+      "par": 4,
+      "par_source": "osm"
+    },
+    {
+      "ref": 15,
+      "name": null,
+      "length_m": 159.3,
+      "length_yd": 174,
+      "bearing_deg": 294.2,
+      "facing": "WNW",
+      "par": 3,
+      "par_source": "osm"
+    },
+    {
+      "ref": 16,
+      "name": null,
+      "length_m": 467.9,
+      "length_yd": 512,
+      "bearing_deg": 89.0,
+      "facing": "E",
+      "par": 5,
+      "par_source": "osm"
+    },
+    {
+      "ref": 17,
+      "name": null,
+      "length_m": 327.4,
+      "length_yd": 358,
+      "bearing_deg": 273.9,
+      "facing": "W",
+      "par": 4,
+      "par_source": "osm"
+    },
+    {
+      "ref": 18,
+      "name": null,
+      "length_m": 387.2,
+      "length_yd": 423,
+      "bearing_deg": 49.7,
+      "facing": "NE",
+      "par": 4,
+      "par_source": "osm"
+    }
+  ]
+}

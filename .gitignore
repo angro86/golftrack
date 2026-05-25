@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+
+# Large regenerable downloads — keep small reports + previews + splines in git
+courses/*/raw/
+courses/*/derived/features.geojson
+*.laz
+*.las
+*.tif
+*.tiff

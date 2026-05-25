@@ -1,0 +1,32 @@
+# Green Hills Country Club — GSPro course build config
+course:
+  name: Green Hills Country Club
+  slug: green-hills
+  location: Millbrae, CA, USA
+  architect: Alister MacKenzie (1930)
+  holes: 18
+
+# Course center (from the Google Maps pin)
+center:
+  lat: 37.6047
+  lon: -122.4085
+
+# Capture radii (meters)
+course_radius_m: 850      # playable course + immediate surrounds
+scenery_radius_m: 1600    # neighborhood / mid-distance scenery
+
+# Projected CRS for accurate lengths/areas — UTM zone 10N (SF Peninsula)
+projected_epsg: 32610
+
+overpass:
+  endpoint: https://overpass-api.de/api/interpreter
+  user_agent: "golftrack-gspro/0.1 (angro86@gmail.com)"
+
+# USGS 3DEP Entwine Point Tiles (public AWS) — resolved at build time
+lidar:
+  ept_public_bucket: https://usgs-lidar-public.s3.amazonaws.com
+
+# Landmarks for orientation / viewshed annotations
+landmarks:
+  SFO airport: {lat: 37.6213, lon: -122.3790}
+  Downtown SF: {lat: 37.7790, lon: -122.4180}

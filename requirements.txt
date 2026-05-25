@@ -1,0 +1,12 @@
+# Phase 1+ (layout/features) — pip-installable, no system libs needed
+numpy
+pyproj
+shapely
+matplotlib
+requests
+pyyaml
+
+# Phase 2 (terrain/trees from LIDAR) — added when we build the heightmap stage
+# rasterio
+# laspy[lazrs]
+# pdal  (point-cloud engine; installed via conda/mamba, see docs)
