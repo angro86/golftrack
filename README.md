@@ -17,7 +17,7 @@ everything *upstream* of that so the Unity build starts mostly done:
 | terrain | bare-earth heightmap (OPCD/Unity ready) | done (USGS 3DEP 1 m) |
 | features | golf polygons → pre-traced Inkscape splines (SVG) | done (smoothed, layered) |
 | trees | LIDAR canopy → individual tree positions (Arborist) | done (12,410 trees) |
-| scenery | surrounding buildings / airport / water | viewshed done; building heights next |
+| scenery | surrounding buildings / airport / water | done (viewshed + building heights) |
 
 ## Setup
 
@@ -46,6 +46,9 @@ python3 -m venv .venv
 
 # Per-hole viewshed to SFO / the bay / the city (wide-area DEM line-of-sight)
 .venv/bin/python scripts/build_viewshed.py green-hills
+
+# Per-footprint building heights from LIDAR (neighborhood + clubhouse)
+.venv/bin/python scripts/build_buildings.py green-hills
 
 # OSM + generated fairways -> Inkscape-layered SVG splines (smoothed) + preview
 .venv/bin/python scripts/build_splines.py green-hills

@@ -123,7 +123,7 @@ def _building_mask(features, cfg, res):
     return mask
 
 
-def build_chm(cfg, features, res=2048):
+def build_chm(cfg, features, res=2048, mask_buildings=True):
     import rasterio
     from gspro_course import terrain
 
@@ -152,7 +152,8 @@ def build_chm(cfg, features, res=2048):
     chm = np.where(np.isfinite(dsm), dsm - dtm, 0.0)
     chm[~np.isfinite(chm)] = 0.0
     chm = np.clip(chm, 0, 60)
-    chm[_building_mask(features, cfg, res)] = 0.0
+    if mask_buildings:
+        chm[_building_mask(features, cfg, res)] = 0.0
     return chm, cell, n_nodes, len(z)
 
 
