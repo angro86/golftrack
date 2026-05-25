@@ -1,0 +1,397 @@
+{
+  "course": "Green Hills Country Club",
+  "location": "Millbrae, CA, USA",
+  "architect": "Alister MacKenzie (1930)",
+  "center_latlon": [
+    37.6047,
+    -122.4085
+  ],
+  "par": 71,
+  "tees": [
+    {
+      "name": "Black/Blue Combo",
+      "yards": 6428,
+      "par": 71,
+      "rating": 72.2,
+      "slope": 143
+    }
+  ],
+  "terrain": {
+    "crs_epsg": 32610,
+    "box_m": 2048,
+    "heightmap_res": 2049,
+    "meters_per_pixel": 1.0,
+    "min_elev_m": -0.53,
+    "max_elev_m": 167.35,
+    "unity_terrain_height_m": 167.88
+  },
+  "feature_counts": {
+    "green": 19,
+    "tee": 20,
+    "bunker": 69,
+    "cartpath": 8,
+    "trees": 12409,
+    "buildings": 3534,
+    "water": 3,
+    "fairways": 24
+  },
+  "holes": [
+    {
+      "hole": 1,
+      "par": 4,
+      "handicap": 13,
+      "yards": {
+        "Black/Blue Combo": 343
+      },
+      "play_bearing_deg": 236,
+      "faces": "SW",
+      "tee_forward_latlon": [
+        37.6048769,
+        -122.4084775
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6033184,
+        -122.4114221
+      ]
+    },
+    {
+      "hole": 2,
+      "par": 5,
+      "handicap": 15,
+      "yards": {
+        "Black/Blue Combo": 525
+      },
+      "play_bearing_deg": 42,
+      "faces": "NE",
+      "tee_forward_latlon": [
+        37.6035119,
+        -122.4116335
+      ],
+      "tee_black_latlon": [
+        37.6032384,
+        -122.4116658
+      ],
+      "green_center_latlon": [
+        37.6065327,
+        -122.4082297
+      ]
+    },
+    {
+      "hole": 3,
+      "par": 5,
+      "handicap": 5,
+      "yards": {
+        "Black/Blue Combo": 513
+      },
+      "play_bearing_deg": 225,
+      "faces": "SW",
+      "tee_forward_latlon": [
+        37.6068928,
+        -122.4082126
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6040219,
+        -122.4119033
+      ]
+    },
+    {
+      "hole": 4,
+      "par": 3,
+      "handicap": 11,
+      "yards": {
+        "Black/Blue Combo": 168
+      },
+      "play_bearing_deg": 195,
+      "faces": "SSW",
+      "tee_forward_latlon": [
+        37.6037317,
+        -122.4118137
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6023288,
+        -122.4122893
+      ]
+    },
+    {
+      "hole": 5,
+      "par": 4,
+      "handicap": 1,
+      "yards": {
+        "Black/Blue Combo": 414
+      },
+      "play_bearing_deg": 4,
+      "faces": "N",
+      "tee_forward_latlon": [
+        37.602266,
+        -122.4125442
+      ],
+      "tee_black_latlon": [
+        37.6019124,
+        -122.4123524
+      ],
+      "green_center_latlon": [
+        37.6051891,
+        -122.4122305
+      ]
+    },
+    {
+      "hole": 6,
+      "par": 4,
+      "handicap": 7,
+      "yards": {
+        "Black/Blue Combo": 426
+      },
+      "play_bearing_deg": 59,
+      "faces": "ENE",
+      "tee_forward_latlon": [
+        37.6054055,
+        -122.4119399
+      ],
+      "tee_black_latlon": [
+        37.604865,
+        -122.4119438
+      ],
+      "green_center_latlon": [
+        37.6070616,
+        -122.4084226
+      ]
+    },
+    {
+      "hole": 7,
+      "par": 3,
+      "handicap": 17,
+      "yards": {
+        "Black/Blue Combo": 141
+      },
+      "play_bearing_deg": 159,
+      "faces": "SSE",
+      "tee_forward_latlon": [
+        37.606927,
+        -122.408108
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.605793,
+        -122.4075577
+      ]
+    },
+    {
+      "hole": 8,
+      "par": 4,
+      "handicap": 9,
+      "yards": {
+        "Black/Blue Combo": 378
+      },
+      "play_bearing_deg": 139,
+      "faces": "SE",
+      "tee_forward_latlon": [
+        37.605053,
+        -122.4073584
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6026623,
+        -122.404813
+      ]
+    },
+    {
+      "hole": 9,
+      "par": 4,
+      "handicap": 3,
+      "yards": {
+        "Black/Blue Combo": 358
+      },
+      "play_bearing_deg": 314,
+      "faces": "NW",
+      "tee_forward_latlon": [
+        37.6024298,
+        -122.4050389
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6044868,
+        -122.4077162
+      ]
+    },
+    {
+      "hole": 10,
+      "par": 4,
+      "handicap": 18,
+      "yards": {
+        "Black/Blue Combo": 343
+      },
+      "play_bearing_deg": 131,
+      "faces": "SE",
+      "tee_forward_latlon": [
+        37.604191,
+        -122.408268
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6023053,
+        -122.4055911
+      ]
+    },
+    {
+      "hole": 11,
+      "par": 4,
+      "handicap": 6,
+      "yards": {
+        "Black/Blue Combo": 348
+      },
+      "play_bearing_deg": 302,
+      "faces": "WNW",
+      "tee_forward_latlon": [
+        37.6019747,
+        -122.4058255
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6034788,
+        -122.4088012
+      ]
+    },
+    {
+      "hole": 12,
+      "par": 4,
+      "handicap": 16,
+      "yards": {
+        "Black/Blue Combo": 359
+      },
+      "play_bearing_deg": 115,
+      "faces": "ESE",
+      "tee_forward_latlon": [
+        37.6031497,
+        -122.4097048
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6018627,
+        -122.4063093
+      ]
+    },
+    {
+      "hole": 13,
+      "par": 3,
+      "handicap": 14,
+      "yards": {
+        "Black/Blue Combo": 163
+      },
+      "play_bearing_deg": 253,
+      "faces": "WSW",
+      "tee_forward_latlon": [
+        37.6016632,
+        -122.406394
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6012659,
+        -122.4080816
+      ]
+    },
+    {
+      "hole": 14,
+      "par": 4,
+      "handicap": 2,
+      "yards": {
+        "Black/Blue Combo": 373
+      },
+      "play_bearing_deg": 264,
+      "faces": "W",
+      "tee_forward_latlon": [
+        37.6010058,
+        -122.4075585
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6007145,
+        -122.4114242
+      ]
+    },
+    {
+      "hole": 15,
+      "par": 3,
+      "handicap": 10,
+      "yards": {
+        "Black/Blue Combo": 173
+      },
+      "play_bearing_deg": 294,
+      "faces": "WNW",
+      "tee_forward_latlon": [
+        37.600233,
+        -122.4113838
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6008331,
+        -122.4130276
+      ]
+    },
+    {
+      "hole": 16,
+      "par": 5,
+      "handicap": 12,
+      "yards": {
+        "Black/Blue Combo": 534
+      },
+      "play_bearing_deg": 89,
+      "faces": "E",
+      "tee_forward_latlon": [
+        37.6015805,
+        -122.4129735
+      ],
+      "tee_black_latlon": null,
+      "green_center_latlon": [
+        37.6016278,
+        -122.407678
+      ]
+    },
+    {
+      "hole": 17,
+      "par": 4,
+      "handicap": 8,
+      "yards": {
+        "Black/Blue Combo": 411
+      },
+      "play_bearing_deg": 274,
+      "faces": "W",
+      "tee_forward_latlon": [
+        37.6018875,
+        -122.407366
+      ],
+      "tee_black_latlon": [
+        37.6018316,
+        -122.4068766
+      ],
+      "green_center_latlon": [
+        37.6021051,
+        -122.4110278
+      ]
+    },
+    {
+      "hole": 18,
+      "par": 4,
+      "handicap": 4,
+      "yards": {
+        "Black/Blue Combo": 458
+      },
+      "play_bearing_deg": 50,
+      "faces": "NE",
+      "tee_forward_latlon": [
+        37.6022289,
+        -122.4117062
+      ],
+      "tee_black_latlon": [
+        37.6020567,
+        -122.4120196
+      ],
+      "green_center_latlon": [
+        37.6044854,
+        -122.4083334
+      ]
+    }
+  ]
+}

@@ -17,3 +17,5 @@ courses/*/preview/holes/
 *.las
 *.tif
 *.tiff
+
+courses/*/preview/master_plan.png
