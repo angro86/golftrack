@@ -37,3 +37,18 @@ lidar:
 landmarks:
   SFO airport: {lat: 37.6213, lon: -122.3790}
   Downtown SF: {lat: 37.7790, lon: -122.4180}
+
+# Authoritative scorecard (from the official/GHIN card). Hole arrays are 1..18.
+scorecard:
+  source: "Official scorecard (GHIN) — longest current tees"
+  par_by_hole:  [4, 5, 5, 3, 4, 4, 3, 4, 4, 4, 4, 4, 3, 4, 3, 5, 4, 4]
+  hcp_by_hole:  [13, 15, 5, 11, 1, 7, 17, 9, 3, 18, 6, 16, 14, 2, 10, 12, 8, 4]
+  tees:
+    - name: "Black/Blue Combo"
+      color: "#101820"
+      par: 71
+      yards: 6428
+      rating: 72.2
+      slope: 143
+      holes_yards: [343, 525, 513, 168, 414, 426, 141, 378, 358,
+                    343, 348, 359, 163, 373, 173, 534, 411, 458]

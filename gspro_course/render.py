@@ -100,7 +100,11 @@ def render(features, report, cfg, out_path):
                     ha="center", va="center", zorder=11)
 
     title = f"{cfg.name} — layout from OpenStreetMap"
-    sub = f"{report['holes_found']} holes · {report['total_yards']} yd · par {report['total_par']} · {cfg.architect}"
+    tee = (report.get("tees") or [{}])[-1]
+    extra = (f" · rating {tee['rating']}/slope {tee['slope']}"
+             if tee.get("rating") else "")
+    sub = (f"{report['holes_found']} holes · {report['total_yards']} yd · "
+           f"par {report['total_par']}{extra} · {cfg.architect}")
     ax.set_title(f"{title}\n{sub}", fontsize=14)
 
     fig.tight_layout()
