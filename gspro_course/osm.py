@@ -19,6 +19,7 @@ def build_query(lat, lon, course_r, scenery_r):
   way(around:{course_r},{lat},{lon})["leisure"="golf_course"];
   relation(around:{course_r},{lat},{lon})["leisure"="golf_course"];
   way(around:{course_r},{lat},{lon})["natural"="water"];
+  way(around:{course_r},{lat},{lon})["waterway"];
   way(around:{scenery_r},{lat},{lon})["building"];
   way(around:{scenery_r},{lat},{lon})["aeroway"];
 );
@@ -62,6 +63,8 @@ def categorize(el):
         return "course_boundary"
     if t.get("natural") == "water":
         return "water"
+    if t.get("waterway"):
+        return "creek"
     if t.get("aeroway"):
         return "aeroway:" + t["aeroway"]
     if "building" in t:

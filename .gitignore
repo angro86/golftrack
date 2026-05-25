@@ -10,6 +10,7 @@ courses/*/preview/aerial*.png
 courses/*/preview/chm.png
 courses/*/preview/trees.png
 courses/*/preview/fairways_check.png
+courses/*/preview/water_check.png
 courses/*/preview/holes/
 *.laz
 *.las

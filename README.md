@@ -35,8 +35,14 @@ python3 -m venv .venv
 # Pull USGS 3DEP DEM, write 16-bit heightmap (PNG + RAW) + meta + hillshade
 .venv/bin/python scripts/build_terrain.py green-hills
 
-# Generate fairway polygons for the 14 holes OSM didn't map
+# Detect fairways from the aerial (consistent mown green)
 .venv/bin/python scripts/build_fairways.py green-hills
+
+# Place championship (black) tee boxes; edit config/<slug>-black-tees.yaml for exact spots
+.venv/bin/python scripts/build_backtees.py green-hills
+
+# Assemble water: ponds + buffered creek channel
+.venv/bin/python scripts/build_water.py green-hills
 
 # OSM + generated fairways -> Inkscape-layered SVG splines (smoothed) + preview
 .venv/bin/python scripts/build_splines.py green-hills

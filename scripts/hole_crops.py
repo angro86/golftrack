@@ -15,8 +15,10 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from gspro_course import config, osm, fairways, tees
+from gspro_course import config, osm, fairways, tees, water
 from gspro_course.geo import Projector
+
+_REPLACED = {"fairway", "water", "water_hazard", "lateral_water_hazard", "creek"}
 from gspro_course.terrain import utm_bbox
 from gspro_course.splines import LAYERS, LINE_LAYERS
 
@@ -46,8 +48,8 @@ def main():
         return ((x - xmin) / box * px, (ymax - y) / box * px)
 
     trees = json.loads((cfg.derived_dir / "trees.json").read_text())["trees"]
-    features = [f for f in osm.parse(osm.fetch(cfg)) if f["category"] != "fairway"]
-    features += fairways.load_generated(cfg) + tees.load(cfg)
+    features = [f for f in osm.parse(osm.fetch(cfg)) if f["category"] not in _REPLACED]
+    features += fairways.load_generated(cfg) + tees.load(cfg) + water.load(cfg)
     holes = {int(f["tags"]["ref"]): f for f in features
              if f["category"] == "hole" and f["tags"].get("ref", "").isdigit()}
     # black tee box coords per hole, to widen the crop to include them

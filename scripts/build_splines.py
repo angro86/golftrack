@@ -11,7 +11,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from gspro_course import config, osm, splines, fairways, tees
+from gspro_course import config, osm, splines, fairways, tees, water
+
+_REPLACED = {"fairway", "water", "water_hazard", "lateral_water_hazard", "creek"}
 
 
 def main():
@@ -24,10 +26,10 @@ def main():
     cfg.ensure_dirs()
     print(f"== {cfg.name}: splines ==")
 
-    # drop OSM's crude fairways in favour of the aerial-detected ones
+    # use aerial-detected fairways + assembled water + championship tees
     features = [f for f in osm.parse(osm.fetch(cfg, force=args.force))
-                if f["category"] != "fairway"]
-    features += fairways.load_generated(cfg) + tees.load(cfg)
+                if f["category"] not in _REPLACED]
+    features += (fairways.load_generated(cfg) + tees.load(cfg) + water.load(cfg))
     svg_path = cfg.derived_dir / "splines.svg"
     counts = splines.build(features, cfg, svg_path)
     print("splines per layer:", json.dumps(counts))
