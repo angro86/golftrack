@@ -15,7 +15,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from gspro_course import config, osm
+from gspro_course import config, osm, fairways
 from gspro_course.geo import Projector
 from gspro_course.terrain import utm_bbox
 from gspro_course.splines import LAYERS, LINE_LAYERS
@@ -46,7 +46,7 @@ def main():
         return ((x - xmin) / box * px, (ymax - y) / box * px)
 
     trees = json.loads((cfg.derived_dir / "trees.json").read_text())["trees"]
-    features = osm.parse(osm.fetch(cfg))
+    features = osm.parse(osm.fetch(cfg)) + fairways.load_generated(cfg)
     holes = {int(f["tags"]["ref"]): f for f in features
              if f["category"] == "hole" and f["tags"].get("ref", "").isdigit()}
     par = {h["ref"]: h["par"] for h in

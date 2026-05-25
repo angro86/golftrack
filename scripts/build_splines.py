@@ -11,7 +11,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from gspro_course import config, osm, splines
+from gspro_course import config, osm, splines, fairways
 
 
 def main():
@@ -25,6 +25,7 @@ def main():
     print(f"== {cfg.name}: splines ==")
 
     features = osm.parse(osm.fetch(cfg, force=args.force))
+    features += fairways.load_generated(cfg)
     svg_path = cfg.derived_dir / "splines.svg"
     counts = splines.build(features, cfg, svg_path)
     print("splines per layer:", json.dumps(counts))

@@ -35,7 +35,10 @@ python3 -m venv .venv
 # Pull USGS 3DEP DEM, write 16-bit heightmap (PNG + RAW) + meta + hillshade
 .venv/bin/python scripts/build_terrain.py green-hills
 
-# OSM golf polygons -> Inkscape-layered SVG splines (smoothed) + preview
+# Generate fairway polygons for the 14 holes OSM didn't map
+.venv/bin/python scripts/build_fairways.py green-hills
+
+# OSM + generated fairways -> Inkscape-layered SVG splines (smoothed) + preview
 .venv/bin/python scripts/build_splines.py green-hills
 
 # USGS NAIP aerial (0.3 m) -> georeferenced overlay + spline validation image
