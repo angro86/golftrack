@@ -6,6 +6,7 @@ __pycache__/
 courses/*/raw/
 courses/*/derived/features.geojson
 courses/*/derived/heightmap.raw
+courses/*/preview/aerial*.png
 *.laz
 *.las
 *.tif
