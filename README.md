@@ -15,7 +15,7 @@ everything *upstream* of that so the Unity build starts mostly done:
 |-------|--------|--------|
 | acquire | OSM features, USGS LIDAR, NAIP aerial | OSM + DEM done |
 | terrain | bare-earth heightmap (OPCD/Unity ready) | done (USGS 3DEP 1 m) |
-| features | golf polygons → pre-traced Inkscape splines (SVG) | geojson done; SVG next |
+| features | golf polygons → pre-traced Inkscape splines (SVG) | done (smoothed, layered) |
 | trees | LIDAR canopy → individual tree positions (Arborist) | planned |
 | scenery | surrounding buildings / airport / water | data pulled |
 
@@ -34,6 +34,9 @@ python3 -m venv .venv
 
 # Pull USGS 3DEP DEM, write 16-bit heightmap (PNG + RAW) + meta + hillshade
 .venv/bin/python scripts/build_terrain.py green-hills
+
+# OSM golf polygons -> Inkscape-layered SVG splines (smoothed) + preview
+.venv/bin/python scripts/build_splines.py green-hills
 ```
 
 Outputs land in `courses/<slug>/`:
