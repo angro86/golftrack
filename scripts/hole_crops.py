@@ -15,7 +15,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from gspro_course import config, osm, fairways
+from gspro_course import config, osm, fairways, tees
 from gspro_course.geo import Projector
 from gspro_course.terrain import utm_bbox
 from gspro_course.splines import LAYERS, LINE_LAYERS
@@ -46,9 +46,17 @@ def main():
         return ((x - xmin) / box * px, (ymax - y) / box * px)
 
     trees = json.loads((cfg.derived_dir / "trees.json").read_text())["trees"]
-    features = osm.parse(osm.fetch(cfg)) + fairways.load_generated(cfg)
+    features = [f for f in osm.parse(osm.fetch(cfg)) if f["category"] != "fairway"]
+    features += fairways.load_generated(cfg) + tees.load(cfg)
     holes = {int(f["tags"]["ref"]): f for f in features
              if f["category"] == "hole" and f["tags"].get("ref", "").isdigit()}
+    # black tee box coords per hole, to widen the crop to include them
+    blacktee = {}
+    for f in features:
+        if f["category"] == "tee" and f["tags"].get("tee") == "black" \
+                and f["tags"].get("ref", "").isdigit():
+            blacktee.setdefault(int(f["tags"]["ref"]), []).extend(
+                proj.xy(lon, lat) for lon, lat in f["geom"].exterior.coords)
     par = {h["ref"]: h["par"] for h in
            json.loads((cfg.derived_dir / "holes.json").read_text())["holes"]}
 
@@ -58,7 +66,8 @@ def main():
         if hn not in holes:
             continue
         cl = [proj.xy(lon, lat) for lon, lat in holes[hn]["geom"].coords]
-        xs = [p[0] for p in cl]; ys = [p[1] for p in cl]
+        pts_xy = cl + blacktee.get(hn, [])
+        xs = [p[0] for p in pts_xy]; ys = [p[1] for p in pts_xy]
         bx0, bx1 = min(xs) - BUF_M, max(xs) + BUF_M
         by0, by1 = min(ys) - BUF_M, max(ys) + BUF_M
 

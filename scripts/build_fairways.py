@@ -17,12 +17,9 @@ def main():
     cfg.ensure_dirs()
     print(f"== {cfg.name}: generate missing fairways ==")
     features = osm.parse(osm.fetch(cfg))
-    osm_fw = sum(1 for f in features if f["category"] == "fairway")
-    results = fairways.generate(cfg, features)
-    out = fairways.write_geojson(cfg, results)
-    gen_holes = sorted(ref for ref, _ in results)
-    print(f"OSM fairways kept: {osm_fw} | generated: {len(results)} "
-          f"for holes {gen_holes}")
+    polys = fairways.generate(cfg, features)
+    out = fairways.write_geojson(cfg, polys)
+    print(f"detected {len(polys)} fairway regions from the aerial")
     print("wrote", out)
 
 

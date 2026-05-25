@@ -1,88 +1,114 @@
-"""Generate fairway polygons for holes that OSM didn't map.
+"""Detect fairways from the 0.3 m aerial as the lightest mown green grass.
 
-Buffers each hole centerline into a corridor, clips it to the course boundary,
-subtracts greens/bunkers/water, and lets the detected tree crowns pinch the
-edges so the fairway narrows through tree-lined holes. Holes that already have
-an OSM fairway are left alone.
+Mown fairway reads brighter/lighter green than the rough in NAIP. We take the
+green pixels inside the course, keep the brightest fraction, bridge mowing
+stripes, drop greens/tees/bunkers/water + tree crowns, restrict to the hole
+corridors, and polygonize into detailed fairway shapes.
 """
 import json
+import warnings
 
-from shapely.geometry import Point, Polygon, MultiPolygon, shape, mapping
-from shapely.ops import unary_union, transform as shp_transform
+import numpy as np
+
+warnings.filterwarnings("ignore", category=FutureWarning)
+from shapely.geometry import shape, mapping, Polygon
+from shapely.ops import transform as shp_transform, unary_union
 from pyproj import Transformer
 
-HALF_WIDTH_M = 16.0   # ~32 m corridor
-MIN_PIECE_AREA = 90.0
+from gspro_course.terrain import utm_bbox
 
 
-def _fill_holes(g):
-    if g.geom_type == "Polygon":
-        return Polygon(g.exterior)
-    if g.geom_type == "MultiPolygon":
-        return MultiPolygon([Polygon(p.exterior) for p in g.geoms])
-    return g
+def _rasterize(polys_utm, xmin, ymax, cell, shp, dilate=0):
+    from skimage.draw import polygon as draw_polygon
+    from skimage.morphology import binary_dilation, disk
+    m = np.zeros(shp, bool)
+    for g in polys_utm:
+        parts = [g] if g.geom_type == "Polygon" else (
+            list(g.geoms) if g.geom_type == "MultiPolygon" else [])
+        for gg in parts:
+            xs, ys = gg.exterior.coords.xy
+            cc = (np.asarray(xs) - xmin) / cell
+            rr = (ymax - np.asarray(ys)) / cell
+            yy, xx = draw_polygon(rr, cc, shape=shp)
+            m[yy, xx] = True
+    if dilate:
+        m = binary_dilation(m, disk(dilate))
+    return m
 
 
-def generate(cfg, features):
+def generate(cfg, features, brightness_pct=78, near_centerline_m=34,
+             close_radius=4):
+    from PIL import Image
+    from skimage.morphology import (binary_closing, binary_opening, disk,
+                                    remove_small_objects, remove_small_holes)
+    from skimage.draw import disk as draw_disk
+    from rasterio.features import shapes as rio_shapes
+    from rasterio.transform import from_origin
+
+    rgb = np.asarray(Image.open(cfg.raw_dir / "naip.png").convert("RGB")).astype(np.int16)
+    px = rgb.shape[0]
+    (xmin, ymin, xmax, ymax), _ = utm_bbox(cfg)
+    cell = cfg.terrain_box_m / px
+    R, G, B = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    exg = 2 * G - R - B
+    grass = (exg > 10) & (G > 70)
+
     fwd = Transformer.from_crs(4326, cfg.epsg, always_xy=True)
     inv = Transformer.from_crs(cfg.epsg, 4326, always_xy=True)
     to_utm = lambda g: shp_transform(fwd.transform, g)
     to_ll = lambda g: shp_transform(inv.transform, g)
 
-    def union_cat(cats):
-        gs = [to_utm(f["geom"]) for f in features
-              if f["category"] in cats and f["geom"].geom_type == "Polygon"]
-        return unary_union(gs) if gs else None
+    def upolys(cats):
+        return [to_utm(f["geom"]) for f in features
+                if f["category"] in cats and f["geom"].geom_type == "Polygon"]
 
-    boundary = union_cat({"course_boundary"})
-    osm_fw = [to_utm(f["geom"]) for f in features if f["category"] == "fairway"]
-    hazards = union_cat({"green", "water", "water_hazard", "lateral_water_hazard"})
-    bunkers = union_cat({"bunker"})
+    boundary = upolys({"course_boundary"})
+    bmask = (_rasterize(boundary, xmin, ymax, cell, (px, px))
+             if boundary else np.ones((px, px), bool))
+    exclude = _rasterize(upolys({"green", "tee", "bunker", "water",
+                                 "water_hazard", "lateral_water_hazard",
+                                 "clubhouse"}), xmin, ymax, cell, (px, px), dilate=2)
 
+    tmask = np.zeros((px, px), bool)
     tj = cfg.derived_dir / "trees.json"
-    trees = json.loads(tj.read_text())["trees"] if tj.exists() else []
+    if tj.exists():
+        for t in json.loads(tj.read_text())["trees"]:
+            rr, cc = draw_disk(((ymax - t["y_utm"]) / cell, (t["x_utm"] - xmin) / cell),
+                               max(t["crown_radius_m"] / cell, 1.5), shape=(px, px))
+            tmask[rr, cc] = True
 
-    holes = sorted(
-        [f for f in features if f["category"] == "hole"
-         and f["tags"].get("ref", "").isdigit()],
-        key=lambda f: int(f["tags"]["ref"]))
+    valid = bmask & grass & ~exclude & ~tmask
+    if valid.sum() < 1000:
+        return []
+    thr = np.percentile(G[valid], brightness_pct)
+    fw = valid & (G >= thr)
 
-    results = []
-    for h in holes:
-        ref = int(h["tags"]["ref"])
-        cl = to_utm(h["geom"])
-        if any(cl.intersects(fw) for fw in osm_fw):
-            continue  # OSM already maps this fairway
+    m2 = cell * cell
+    fw = binary_closing(fw, disk(close_radius))             # bridge mowing stripes
+    fw = remove_small_holes(fw, area_threshold=int(250 / m2))
+    fw = binary_opening(fw, disk(2))
+    fw = remove_small_objects(fw, min_size=int(400 / m2))
 
-        corr = cl.buffer(HALF_WIDTH_M)
-        if boundary is not None:
-            corr = corr.intersection(boundary)
-        for sub in (hazards, bunkers):
-            if sub is not None and not sub.is_empty:
-                corr = corr.difference(sub)
+    cls = [to_utm(f["geom"]) for f in features if f["category"] == "hole"]
+    if cls:
+        corridor = unary_union([c.buffer(near_centerline_m) for c in cls])
+        fw &= _rasterize([corridor], xmin, ymax, cell, (px, px))
 
-        reach = cl.buffer(HALF_WIDTH_M + 18)
-        crowns = [Point(t["x_utm"], t["y_utm"]).buffer(max(t["crown_radius_m"], 2.0))
-                  for t in trees if reach.contains(Point(t["x_utm"], t["y_utm"]))]
-        if crowns:
-            corr = corr.difference(unary_union(crowns))
-
-        pieces = (list(corr.geoms) if corr.geom_type == "MultiPolygon"
-                  else ([corr] if not corr.is_empty else []))
-        keep = [p for p in pieces if p.intersects(cl) and p.area > MIN_PIECE_AREA]
-        if not keep:
+    transform = from_origin(xmin, ymax, cell, cell)
+    polys = []
+    for geom, _v in rio_shapes(fw.astype(np.uint8), mask=fw, transform=transform):
+        g = shape(geom)
+        if g.area < 300:
             continue
-        fw = _fill_holes(unary_union(keep)).simplify(1.0)
-        results.append((ref, to_ll(fw)))
+        g = g.simplify(2.0)
+        polys.append(to_ll(Polygon(g.exterior) if g.geom_type == "Polygon" else g))
+    return polys
 
-    return results
 
-
-def write_geojson(cfg, results):
+def write_geojson(cfg, polys):
     gj = {"type": "FeatureCollection", "features": [
-        {"type": "Feature",
-         "properties": {"category": "fairway", "ref": ref, "generated": True},
-         "geometry": mapping(geom)} for ref, geom in results]}
+        {"type": "Feature", "properties": {"category": "fairway", "source": "aerial"},
+         "geometry": mapping(g)} for g in polys]}
     out = cfg.derived_dir / "fairways.geojson"
     out.write_text(json.dumps(gj))
     return out
@@ -98,6 +124,5 @@ def load_generated(cfg):
         g = shape(ft["geometry"])
         if g.is_valid and not g.is_empty:
             feats.append({"category": "fairway", "geom": g,
-                          "tags": {"ref": str(ft["properties"].get("ref", "")),
-                                   "generated": "yes"}})
+                          "tags": {"source": "aerial"}})
     return feats
