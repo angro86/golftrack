@@ -19,11 +19,16 @@ everything *upstream* of that so the Unity build starts mostly done:
 | trees | LIDAR canopy → individual tree positions (Arborist) | done (12,410 trees) |
 | scenery | surrounding buildings / airport / water | done (viewshed + building heights) |
 
+**To assemble the playable course in Unity/OPCD, follow [`docs/BUILD_GUIDE.md`](docs/BUILD_GUIDE.md).**
+
 ## Setup
 
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
+
+# run the entire data pipeline in one command
+.venv/bin/python scripts/build_all.py green-hills          # add --crops for per-hole images
 ```
 
 ## Usage
