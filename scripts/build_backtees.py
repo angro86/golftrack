@@ -32,7 +32,16 @@ def main():
     results = tees.generate(cfg, features)
     out = tees.write_geojson(cfg, results)
     man = [r["ref"] for r in results if r["source"] == "manual"]
-    print(f"tee boxes: {len(results)} ({'manual: ' + str(man) if man else 'all auto'})")
+    print(f"tee boxes: {len(results)} (manual: {man})" if man
+          else f"tee boxes: {len(results)} (all auto)")
+
+    print("yardage check (from each black tee):")
+    for ref, play, card in tees.verify_yardage(cfg, features, results):
+        flag = "ok" if abs(play - card) <= 15 else "CHECK"
+        print(f"  hole {ref:>2}: {play} yd vs card {card}  [{flag}]")
+
+    removed = tees.prune_trees_on_tees(cfg, results)
+    print(f"trees removed from new tee boxes: {removed}")
     print("wrote", out)
 
 

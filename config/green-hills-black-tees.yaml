@@ -2,9 +2,9 @@
 # Auto-estimated by extending the line of play back by the yardage gap.
 # CORRECT the lat/lon to the real tee (right-click it in Google Maps to
 # copy coords). bearing = play direction in degrees (0=N, 90=E).
-black_tees:
-  2: {lat: 37.6033716, lon: -122.4118449, bearing: 49.8}   # gap 27 yd -> card 525
-  5: {lat: 37.6017854, lon: -122.4125945, bearing: 4.4}   # gap 59 yd -> card 414
-  6: {lat: 37.6052789, lon: -122.4122069, bearing: 58.9}   # gap 30 yd -> card 426
-  17: {lat: 37.6018091, lon: -122.4068265, bearing: 280.0}   # gap 53 yd -> card 411
-  18: {lat: 37.6020464, lon: -122.4119803, bearing: 49.7}   # gap 35 yd -> card 458
+black_tees:   # exact positions supplied by the member (knows the course)
+  2:  {lat: 37.603238394585446, lon: -122.41166577260549, bearing: 49.8}  # card 525
+  5:  {lat: 37.6019123865791,   lon: -122.41235241808066, bearing: 4.4}   # card 414
+  6:  {lat: 37.60486501139051,  lon: -122.41194376701476, bearing: 58.9}  # card 426; trees cleared
+  17: {lat: 37.6018316169004,   lon: -122.4068766178547,  bearing: 280.0} # card 411; trees cleared
+  18: {lat: 37.60205674546677,  lon: -122.4120196207573,  bearing: 49.7}  # card 458; trees cleared

@@ -36,22 +36,28 @@ def _rasterize(polys_utm, xmin, ymax, cell, shp, dilate=0):
     return m
 
 
-def generate(cfg, features, brightness_pct=78, near_centerline_m=34,
-             close_radius=4):
+def generate(cfg, features, contrast=5.0, near_centerline_m=40,
+             close_radius=4, bg_sigma=55):
+    """Fairway = grass that is locally brighter/lusher than its surroundings.
+
+    A global brightness cut fails (lighting varies hole to hole); instead we
+    flag grass whose green channel exceeds the local mean of nearby grass —
+    i.e. the consistent mown lanes that stand out from the rough beside them.
+    """
     from PIL import Image
-    from skimage.morphology import (binary_closing, binary_opening, disk,
+    from scipy.ndimage import gaussian_filter
+    from skimage.morphology import (closing, opening, disk,
                                     remove_small_objects, remove_small_holes)
     from skimage.draw import disk as draw_disk
     from rasterio.features import shapes as rio_shapes
     from rasterio.transform import from_origin
 
-    rgb = np.asarray(Image.open(cfg.raw_dir / "naip.png").convert("RGB")).astype(np.int16)
+    rgb = np.asarray(Image.open(cfg.raw_dir / "naip.png").convert("RGB")).astype(float)
     px = rgb.shape[0]
     (xmin, ymin, xmax, ymax), _ = utm_bbox(cfg)
     cell = cfg.terrain_box_m / px
     R, G, B = rgb[..., 0], rgb[..., 1], rgb[..., 2]
-    exg = 2 * G - R - B
-    grass = (exg > 10) & (G > 70)
+    grass = (2 * G - R - B > 8) & (G > 60)
 
     fwd = Transformer.from_crs(4326, cfg.epsg, always_xy=True)
     inv = Transformer.from_crs(cfg.epsg, 4326, always_xy=True)
@@ -65,9 +71,9 @@ def generate(cfg, features, brightness_pct=78, near_centerline_m=34,
     boundary = upolys({"course_boundary"})
     bmask = (_rasterize(boundary, xmin, ymax, cell, (px, px))
              if boundary else np.ones((px, px), bool))
-    exclude = _rasterize(upolys({"green", "tee", "bunker", "water",
-                                 "water_hazard", "lateral_water_hazard",
-                                 "clubhouse"}), xmin, ymax, cell, (px, px), dilate=2)
+    exclude = _rasterize(upolys({"green", "tee", "bunker", "water", "water_hazard",
+                                 "lateral_water_hazard", "clubhouse", "building"}),
+                         xmin, ymax, cell, (px, px), dilate=2)
 
     tmask = np.zeros((px, px), bool)
     tj = cfg.derived_dir / "trees.json"
@@ -77,28 +83,31 @@ def generate(cfg, features, brightness_pct=78, near_centerline_m=34,
                                max(t["crown_radius_m"] / cell, 1.5), shape=(px, px))
             tmask[rr, cc] = True
 
-    valid = bmask & grass & ~exclude & ~tmask
-    if valid.sum() < 1000:
+    cls = [to_utm(f["geom"]) for f in features if f["category"] == "hole"]
+    corridor = (_rasterize([unary_union([c.buffer(near_centerline_m) for c in cls])],
+                           xmin, ymax, cell, (px, px)) if cls else np.ones((px, px), bool))
+    base = bmask & corridor & ~exclude & ~tmask
+    if (base & grass).sum() < 1000:
         return []
-    thr = np.percentile(G[valid], brightness_pct)
-    fw = valid & (G >= thr)
+
+    # local mean of green over nearby grass, then flag the brighter lanes
+    gs = gaussian_filter(G, 2)
+    gm = gaussian_filter(np.where(grass, gs, 0.0), bg_sigma)
+    wt = gaussian_filter(grass.astype(float), bg_sigma)
+    local_bg = gm / np.maximum(wt, 1e-6)
+    fw = base & grass & ((gs - local_bg) > contrast)
 
     m2 = cell * cell
-    fw = binary_closing(fw, disk(close_radius))             # bridge mowing stripes
-    fw = remove_small_holes(fw, area_threshold=int(250 / m2))
-    fw = binary_opening(fw, disk(2))
-    fw = remove_small_objects(fw, min_size=int(400 / m2))
-
-    cls = [to_utm(f["geom"]) for f in features if f["category"] == "hole"]
-    if cls:
-        corridor = unary_union([c.buffer(near_centerline_m) for c in cls])
-        fw &= _rasterize([corridor], xmin, ymax, cell, (px, px))
+    fw = closing(fw, disk(close_radius))
+    fw = remove_small_holes(fw, int(250 / m2))
+    fw = opening(fw, disk(2))
+    fw = remove_small_objects(fw, int(450 / m2))
 
     transform = from_origin(xmin, ymax, cell, cell)
     polys = []
     for geom, _v in rio_shapes(fw.astype(np.uint8), mask=fw, transform=transform):
         g = shape(geom)
-        if g.area < 300:
+        if g.area < 450:
             continue
         g = g.simplify(2.0)
         polys.append(to_ll(Polygon(g.exterior) if g.geom_type == "Polygon" else g))

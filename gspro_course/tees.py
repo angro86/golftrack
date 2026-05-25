@@ -128,6 +128,55 @@ def write_geojson(cfg, results):
     return out
 
 
+def verify_yardage(cfg, features, results):
+    """Playing length from each black tee = dist(tee -> mapped tee) + centerline."""
+    fwd = Transformer.from_crs(4326, cfg.epsg, always_xy=True)
+    yds = max(cfg.scorecard["tees"], key=lambda t: t["yards"])["holes_yards"]
+    cl = {int(f["tags"]["ref"]): [fwd.transform(lo, la) for lo, la in f["geom"].coords]
+          for f in features if f["category"] == "hole"
+          and f["tags"].get("ref", "").isdigit()}
+    rows = []
+    for r in results:
+        xy = cl.get(r["ref"])
+        if not xy:
+            continue
+        cx, cy = fwd.transform(*r["geom"].centroid.coords[0])
+        seg = math.dist((cx, cy), xy[0])
+        clen = sum(math.dist(xy[i], xy[i + 1]) for i in range(len(xy) - 1))
+        rows.append((r["ref"], round((seg + clen) * M_TO_YD), yds[r["ref"] - 1]))
+    return rows
+
+
+def prune_trees_on_tees(cfg, results, buffer_m=4.0):
+    """Remove detected trees sitting on the new tee boxes (cleared in reality)."""
+    import json
+    import csv
+    from collections import Counter
+    from shapely.geometry import Point
+    from shapely.ops import transform as shp_transform, unary_union
+
+    tj = cfg.derived_dir / "trees.json"
+    if not tj.exists() or not results:
+        return 0
+    fwd = Transformer.from_crs(4326, cfg.epsg, always_xy=True)
+    boxes = unary_union([shp_transform(fwd.transform, r["geom"]).buffer(buffer_m)
+                         for r in results])
+    data = json.loads(tj.read_text())
+    trees = data["trees"]
+    kept = [t for t in trees if not boxes.contains(Point(t["x_utm"], t["y_utm"]))]
+    removed = len(trees) - len(kept)
+    if removed:
+        data["trees"] = kept
+        data["count"] = len(kept)
+        data["buckets"] = dict(Counter(t["bucket"] for t in kept))
+        tj.write_text(json.dumps(data))
+        cols = ["x_utm", "y_utm", "lon", "lat", "height_m", "crown_radius_m", "bucket"]
+        with open(cfg.derived_dir / "trees.csv", "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=cols)
+            w.writeheader(); w.writerows(kept)
+    return removed
+
+
 def load(cfg):
     import json
     p = cfg.derived_dir / "back_tees.geojson"
