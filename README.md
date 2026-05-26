@@ -21,6 +21,20 @@ everything *upstream* of that so the Unity build starts mostly done:
 
 **To assemble the playable course in Unity/OPCD, follow [`docs/BUILD_GUIDE.md`](docs/BUILD_GUIDE.md).**
 
+## Preview
+
+![Full assembled course](courses/green-hills/preview/master_plan.png)
+
+The full pipeline output for Green Hills — fairways, greens, 69 bunkers, creek +
+ponds, championship tees, and 12,409 LIDAR-detected trees on the 0.3 m aerial.
+
+More previews in [`courses/green-hills/preview/`](courses/green-hills/preview/):
+[terrain](courses/green-hills/preview/terrain.png) ·
+[splines on aerial](courses/green-hills/preview/aerial_splines.png) ·
+[fairway detection](courses/green-hills/preview/fairways_check.png) ·
+[per-hole views](courses/green-hills/preview/viewshed_holes.png) ·
+[all 18 holes](courses/green-hills/preview/holes/contact_sheet.png)
+
 ## Setup
 
 ```bash
