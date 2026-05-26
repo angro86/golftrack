@@ -1,0 +1,139 @@
+{
+  "course": "Green Hills Country Club",
+  "crs_epsg": 32610,
+  "greens": [
+    {
+      "green": 1,
+      "gres_m": 0.5,
+      "ground_points": 16813,
+      "density_ppm2": 16.2,
+      "fall_m": 4.99
+    },
+    {
+      "green": 2,
+      "gres_m": 0.5,
+      "ground_points": 20879,
+      "density_ppm2": 16.6,
+      "fall_m": 2.75
+    },
+    {
+      "green": 3,
+      "gres_m": 0.5,
+      "ground_points": 16746,
+      "density_ppm2": 14.9,
+      "fall_m": 2.99
+    },
+    {
+      "green": 4,
+      "gres_m": 0.5,
+      "ground_points": 12876,
+      "density_ppm2": 11.7,
+      "fall_m": 6.52
+    },
+    {
+      "green": 5,
+      "gres_m": 0.5,
+      "ground_points": 20275,
+      "density_ppm2": 13.4,
+      "fall_m": 6.24
+    },
+    {
+      "green": 6,
+      "gres_m": 0.5,
+      "ground_points": 24811,
+      "density_ppm2": 19.8,
+      "fall_m": 2.74
+    },
+    {
+      "green": 7,
+      "gres_m": 0.5,
+      "ground_points": 20268,
+      "density_ppm2": 15.8,
+      "fall_m": 4.35
+    },
+    {
+      "green": 8,
+      "gres_m": 0.5,
+      "ground_points": 19317,
+      "density_ppm2": 12.7,
+      "fall_m": 4.72
+    },
+    {
+      "green": 9,
+      "gres_m": 0.5,
+      "ground_points": 23813,
+      "density_ppm2": 16.0,
+      "fall_m": 4.98
+    },
+    {
+      "green": 10,
+      "gres_m": 0.5,
+      "ground_points": 20494,
+      "density_ppm2": 14.9,
+      "fall_m": 2.5
+    },
+    {
+      "green": 11,
+      "gres_m": 0.5,
+      "ground_points": 13757,
+      "density_ppm2": 11.6,
+      "fall_m": 5.65
+    },
+    {
+      "green": 12,
+      "gres_m": 0.5,
+      "ground_points": 19489,
+      "density_ppm2": 14.2,
+      "fall_m": 1.97
+    },
+    {
+      "green": 13,
+      "gres_m": 0.5,
+      "ground_points": 20773,
+      "density_ppm2": 14.9,
+      "fall_m": 6.1
+    },
+    {
+      "green": 14,
+      "gres_m": 0.5,
+      "ground_points": 13364,
+      "density_ppm2": 11.4,
+      "fall_m": 5.47
+    },
+    {
+      "green": 15,
+      "gres_m": 0.5,
+      "ground_points": 15538,
+      "density_ppm2": 10.4,
+      "fall_m": 8.16
+    },
+    {
+      "green": 16,
+      "gres_m": 0.5,
+      "ground_points": 23131,
+      "density_ppm2": 14.3,
+      "fall_m": 2.14
+    },
+    {
+      "green": 17,
+      "gres_m": 0.5,
+      "ground_points": 24757,
+      "density_ppm2": 15.3,
+      "fall_m": 8.92
+    },
+    {
+      "green": 18,
+      "gres_m": 0.5,
+      "ground_points": 23101,
+      "density_ppm2": 16.3,
+      "fall_m": 5.23
+    },
+    {
+      "green": 19,
+      "gres_m": 0.5,
+      "ground_points": 12076,
+      "density_ppm2": 12.1,
+      "fall_m": 3.08
+    }
+  ]
+}
