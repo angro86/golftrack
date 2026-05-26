@@ -23,7 +23,7 @@ def main():
     cfg.ensure_dirs()
     d = cfg.derived_dir
     proj = Projector(cfg.epsg)
-    features = osm.parse(osm.fetch(cfg))
+    features = osm.drop_practice_greens(osm.parse(osm.fetch(cfg)))
 
     greens = [f for f in features if f["category"] == "green"]
     holes_geom = {int(f["tags"]["ref"]): f for f in features

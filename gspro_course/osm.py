@@ -118,3 +118,11 @@ def to_geojson(features) -> dict:
 def counts(features):
     from collections import Counter
     return dict(Counter(f["category"] for f in features))
+
+
+def drop_practice_greens(features):
+    """Remove practice/chipping greens (tagged name ~ 'practice') — keep the 18
+    hole greens only."""
+    return [f for f in features
+            if not (f["category"] == "green"
+                    and "practice" in f["tags"].get("name", "").lower())]

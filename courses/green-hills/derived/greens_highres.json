@@ -127,13 +127,6 @@
       "ground_points": 23101,
       "density_ppm2": 16.3,
       "fall_m": 5.23
-    },
-    {
-      "green": 19,
-      "gres_m": 0.5,
-      "ground_points": 12076,
-      "density_ppm2": 12.1,
-      "fall_m": 3.08
     }
   ]
 }

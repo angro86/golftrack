@@ -48,7 +48,8 @@ def main():
         return ((x - xmin) / box * px, (ymax - y) / box * px)
 
     trees = json.loads((cfg.derived_dir / "trees.json").read_text())["trees"]
-    features = [f for f in osm.parse(osm.fetch(cfg)) if f["category"] not in _REPLACED]
+    features = [f for f in osm.drop_practice_greens(osm.parse(osm.fetch(cfg)))
+                if f["category"] not in _REPLACED]
     features += fairways.load_generated(cfg) + tees.load(cfg) + water.load(cfg)
     holes = {int(f["tags"]["ref"]): f for f in features
              if f["category"] == "hole" and f["tags"].get("ref", "").isdigit()}

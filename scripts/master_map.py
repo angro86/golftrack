@@ -47,7 +47,8 @@ def main():
         x, y = proj.xy(lon, lat)
         return ((x - xmin) / box * px, (ymax - y) / box * px)
 
-    features = [f for f in osm.parse(osm.fetch(cfg)) if f["category"] not in _REPLACED]
+    features = [f for f in osm.drop_practice_greens(osm.parse(osm.fetch(cfg)))
+                if f["category"] not in _REPLACED]
     features += fairways.load_generated(cfg) + water.load(cfg)
     black = tees.load(cfg)
 

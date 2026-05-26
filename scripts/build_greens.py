@@ -101,7 +101,7 @@ def main():
     cfg = config.load(sys.argv[1] if len(sys.argv) > 1 else "green-hills")
     cfg.ensure_dirs()
     print(f"== {cfg.name}: high-res greens ==")
-    features = osm.parse(osm.fetch(cfg))
+    features = osm.drop_practice_greens(osm.parse(osm.fetch(cfg)))
     results = greens.highres(cfg, features)
     meta = _save(cfg, results)
     dens = [m["density_ppm2"] for m in meta]

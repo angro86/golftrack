@@ -27,7 +27,7 @@ def main():
     print(f"== {cfg.name}: splines ==")
 
     # use aerial-detected fairways + assembled water + championship tees
-    features = [f for f in osm.parse(osm.fetch(cfg, force=args.force))
+    features = [f for f in osm.drop_practice_greens(osm.parse(osm.fetch(cfg, force=args.force)))
                 if f["category"] not in _REPLACED]
     features += (fairways.load_generated(cfg) + tees.load(cfg) + water.load(cfg))
     svg_path = cfg.derived_dir / "splines.svg"
